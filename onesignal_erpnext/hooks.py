@@ -5,15 +5,9 @@ app_description = "OneSignal ERPNext Integration - Push Notification Sender For 
 app_email = "ebrahim@ebrahim.co.tz"
 app_license = "mit"
 
-doc_events = {
-    "Notification Log": {
-        "after_insert": "onesignal_erpnext.api.send_onesignal_from_log"
-    }
-}
+doc_events = {"Notification Log": {"after_insert": "onesignal_erpnext.api.send_onesignal_from_log"}}
 
-app_include_js = [
-    "/assets/onesignal_erpnext/js/onesignal.js"
-]
+app_include_js = ["/assets/onesignal_erpnext/js/onesignal.js"]
 
 
 # Apps
@@ -252,4 +246,3 @@ app_include_js = [
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
