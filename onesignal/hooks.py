@@ -5,6 +5,17 @@ app_description = "Onesignal Notification Sender For ErpNext"
 app_email = "ebrahim@ebrahim.co.tz"
 app_license = "mit"
 
+doc_events = {
+    "Notification Log": {
+        "after_insert": "onesignal.api.send_onesignal_from_log"
+    }
+}
+
+app_include_js = [
+    "/assets/onesignal/js/onesignal.js"
+]
+
+
 # Apps
 # ------------------
 
