@@ -104,6 +104,29 @@ settings = {
    });
    ```
 
+4. **Install OneSignal Service Worker**
+
+   OneSignal requires a service worker file to handle push notifications. Create the required worker file in your site's public directory:
+
+   ```bash
+   # Navigate to your site's public directory
+   cd /path/to/frappe-bench/sites/your-site-name/public
+
+   # Create the OneSignal service worker file
+   nano OneSignalSDKWorker.js
+   ```
+
+   In the `OneSignalSDKWorker.js` file, paste the following content:
+
+   ```javascript
+   importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+   ```
+
+   Save and exit the file (Ctrl+X, then Y, then Enter in nano).
+
+   **Important**: Ensure the worker file is accessible at:
+   - `https://your-domain.com/OneSignalSDKWorker.js`
+
 ### PWA (Progressive Web App) Setup
 
 Transform your ERPNext instance into a mobile-installable PWA:
@@ -186,6 +209,7 @@ The app supports three notification scenarios:
    - Verify OneSignal credentials in `api.py`
    - Check ERPNext error logs: `bench logs`
    - Ensure OneSignal script is properly loaded
+   - **Check service worker files**: Verify `OneSignalSDKWorker.js` and `OneSignalSDKUpdaterWorker.js` are accessible at your domain root
 
 2. **PWA not installing**
    - Verify manifest.json is accessible without login
@@ -196,6 +220,13 @@ The app supports three notification scenarios:
    - Verify website script is properly configured
    - Check browser console for JavaScript errors
    - Ensure OneSignal SDK is loaded before custom scripts
+
+4. **Service Worker Issues**
+   - Ensure `OneSignalSDKWorker.js` is in the correct location: `/path/to/frappe-bench/sites/your-site-name/public/`
+   - Check if the file is accessible: `https://your-domain.com/OneSignalSDKWorker.js`
+   - Verify the file contains: `importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");`
+   - Verify file permissions allow web server access
+   - Clear browser cache and try again
 
 ### Error Logs
 
