@@ -1,9 +1,9 @@
 [project]
-name = "onesignal"
+name = "onesignal_erpnext"
 authors = [
     { name = "ebrahim", email = "ebrahim@ebrahim.co.tz"}
 ]
-description = "Onesignal Notification Sender For ErpNext"
+description = "OneSignal ERPNext Integration - Push Notification Sender For ERPNext"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]

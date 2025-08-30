@@ -1,7 +1,7 @@
 app_name = "onesignal_erpnext"
-app_title = "OneSignal"
+app_title = "OneSignal ERPNext"
 app_publisher = "ebrahim"
-app_description = "OneSignal Notification Sender For ErpNext"
+app_description = "OneSignal ERPNext Integration - Push Notification Sender For ERPNext"
 app_email = "ebrahim@ebrahim.co.tz"
 app_license = "mit"
 
@@ -24,11 +24,11 @@ app_include_js = [
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "onesignal",
-# 		"logo": "/assets/onesignal/logo.png",
-# 		"title": "Onesignal",
-# 		"route": "/onesignal",
-# 		"has_permission": "onesignal.api.permission.has_app_permission"
+# 		"name": "onesignal_erpnext",
+# 		"logo": "/assets/onesignal_erpnext/logo.png",
+# 		"title": "OneSignal ERPNext",
+# 		"route": "/onesignal_erpnext",
+# 		"has_permission": "onesignal_erpnext.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -36,15 +36,15 @@ app_include_js = [
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/onesignal/css/onesignal.css"
-# app_include_js = "/assets/onesignal/js/onesignal.js"
+# app_include_css = "/assets/onesignal_erpnext/css/onesignal_erpnext.css"
+# app_include_js = "/assets/onesignal_erpnext/js/onesignal_erpnext.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/onesignal/css/onesignal.css"
-# web_include_js = "/assets/onesignal/js/onesignal.js"
+# web_include_css = "/assets/onesignal_erpnext/css/onesignal_erpnext.css"
+# web_include_js = "/assets/onesignal_erpnext/js/onesignal_erpnext.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "onesignal/public/scss/website"
+# website_theme_scss = "onesignal_erpnext/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
