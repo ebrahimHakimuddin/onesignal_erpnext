@@ -1,18 +1,18 @@
-app_name = "onesignal"
-app_title = "Onesignal"
+app_name = "onesignal_erpnext"
+app_title = "OneSignal"
 app_publisher = "ebrahim"
-app_description = "Onesignal Notification Sender For ErpNext"
+app_description = "OneSignal Notification Sender For ErpNext"
 app_email = "ebrahim@ebrahim.co.tz"
 app_license = "mit"
 
 doc_events = {
     "Notification Log": {
-        "after_insert": "onesignal.api.send_onesignal_from_log"
+        "after_insert": "onesignal_erpnext.api.send_onesignal_from_log"
     }
 }
 
 app_include_js = [
-    "/assets/onesignal/js/onesignal.js"
+    "/assets/onesignal_erpnext/js/onesignal.js"
 ]
 
 
