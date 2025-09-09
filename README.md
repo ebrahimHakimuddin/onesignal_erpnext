@@ -24,109 +24,6 @@ A comprehensive OneSignal push notification integration for ERPNext, enabling re
 
 ## 🛠️ Installation
 
-### 1. Install the App
-
-```bash
-# Navigate to your bench directory
-cd /path/to/your/frappe-bench
-
-# Get the app from repository
-bench get-app https://github.com/ebrahimHakimuddin/onesignal_erpnext.git
-
-# Install the app on your site
-bench --site your-site-name install-app onesignal_erpnext
-
-# Restart your bench
-bench restart
-```
-
-### 2. Configure OneSignal API Keys
-
-Edit the API configuration file:
-
-```bash
-# Navigate to the app directory
-cd apps/onesignal_erpnext/onesignal_erpnext/
-
-# Edit api.py and update your credentials
-nano api.py
-```
-
-Replace the placeholder values in `api.py`:
-
-```python
-settings = {
-    "app_id": "YOUR_ACTUAL_ONESIGNAL_APP_ID",
-    "api_key": "YOUR_ACTUAL_ONESIGNAL_REST_API_KEY",
-}
-```
-
-## 🔧 Configuration
-
-### OneSignal Setup
-
-1. **Create OneSignal App**
-   - Visit [OneSignal](https://onesignal.com/) and create an account
-   - Create a new Web app
-   - Note down your **App ID** and **REST API Key**
-
-2. **Configure Website Settings**
-   
-   Navigate to **Website Settings** > **Header, Robots** section and add:
-
-   ```html
-   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-   <script>
-     window.OneSignalDeferred = window.OneSignalDeferred || [];
-     OneSignalDeferred.push(async function(OneSignal) {
-       await OneSignal.init({
-         appId: "YOUR_ONESIGNAL_APP_ID",
-       });
-     });
-   </script>
-   ```
-
-3. **Add Website Script**
-   
-   Navigate to **Website Settings** > **Website Script** and add:
-
-   ```javascript
-   window.OneSignalDeferred = window.OneSignalDeferred || [];
-
-   frappe.ready(() => {
-     OneSignalDeferred.push(async function (OneSignal) {
-       if (frappe.session.user === "Guest") {
-         await OneSignal.logout();
-       } else {
-         await OneSignal.login(frappe.session.user);
-       }
-     });
-   });
-   ```
-
-4. **Install OneSignal Service Worker**
-
-   OneSignal requires a service worker file to handle push notifications. Create the required worker file in your site's public directory:
-
-   ```bash
-   # Navigate to your site's public directory
-   cd /path/to/frappe-bench/sites/your-site-name/public
-
-   # Create the OneSignal service worker file
-   nano OneSignalSDKWorker.js
-   ```
-
-   In the `OneSignalSDKWorker.js` file, paste the following content:
-
-   ```javascript
-   importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
-   ```
-
-   Save and exit the file (Ctrl+X, then Y, then Enter in nano).
-
-   **Important**: Ensure the worker file is accessible at:
-   - `https://your-domain.com/OneSignalSDKWorker.js`
-
 ### PWA (Progressive Web App) Setup
 
 Transform your ERPNext instance into a mobile-installable PWA:
@@ -173,16 +70,110 @@ Create a `manifest.json` file with the following structure:
 }
 ```
 
-#### 3. Upload and Link Manifest
+1. Ensure the manifest URL is accessible without authentication
 
-1. Upload `manifest.json` as a public file in ERPNext
-2. Add the manifest link to **Website Settings** > **Header, Robots**:
+
+### 1. Install the App
+
+```bash
+# Navigate to your bench directory
+cd /path/to/your/frappe-bench
+
+# Get the app from repository
+bench get-app https://github.com/ebrahimHakimuddin/onesignal_erpnext.git
+```
+
+### 2. Configure OneSignal API Keys
+
+Edit the API configuration file:
+
+```bash
+# Navigate to the app directory
+cd apps/onesignal_erpnext/onesignal_erpnext/
+
+# Edit api.py and update your credentials
+nano api.py
+```
+
+Replace the placeholder values in `api.py`:
+
+```python
+settings = {
+    "app_id": "YOUR_ACTUAL_ONESIGNAL_APP_ID",
+    "api_key": "YOUR_ACTUAL_ONESIGNAL_REST_API_KEY",
+}
+```
+
+
+Install the app on your site:
+
+```bash
+bench --site your-site-name install-app onesignal_erpnext
+
+# Restart your bench
+bench migrate
+```
+
+
+## 🔧 Configuration
+
+### OneSignal Setup
+
+1. **Create OneSignal App**
+   - Visit [OneSignal](https://onesignal.com/) and create an account
+   - Create a new Web app
+   - Note down your **App ID** and **REST API Key**
+
+2. **Configure Website Settings**
+   
+   Navigate to **Website Settings** > **Header, Robots** section and add:
 
 ```html
 <link rel="manifest" href="/files/manifest.json">
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 ```
 
-3. Ensure the manifest URL is accessible without authentication
+3. **Add Website Script**
+   
+   Navigate to **Website Settings** > **Website Script** and add:
+
+```javascript
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+
+frappe.ready(() => {
+   OneSignalDeferred.push(async function (OneSignal) {
+      if (frappe.session.user === "Guest") {
+         await OneSignal.logout();
+      } else {
+         await OneSignal.login(frappe.session.user);
+      }
+   });
+});
+```
+
+4. **Install OneSignal Service Worker**
+
+   OneSignal requires a service worker file to handle push notifications. Create the required worker file in your site's public directory:
+
+```bash
+# Navigate to your site's public directory
+cd /path/to/frappe-bench/sites/your-site-name/public
+
+# Create the OneSignal service worker file
+nano OneSignalSDKWorker.js
+```
+
+   In the `OneSignalSDKWorker.js` file, paste the following content:
+
+```javascript
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+```
+
+   Save and exit the file (Ctrl+X, then Y, then Enter in nano).
+
+   **Important**: Ensure the worker file is accessible at:
+   - `https://your-domain.com/OneSignalSDKWorker.js`
+
 
 ## 🎯 Usage
 
